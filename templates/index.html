@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Tea Leaf Disease Detection</title>
+</head>
+<body>
+    <div id="background-container">
+        <header>
+            <div class="container">
+                <h1>Tea Leaf Disease Detection</h1>
+                <p>Your solution for healthy tea plants</p>
+            </div>
+        </header>
+
+        <section id="content">
+            <div class="container">
+                <section id="upload">
+                    <h2>Upload Image</h2>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <label for="file-upload" class="file-label">
+                            <span>Choose a file</span>
+                            <input type="file" id="file-upload" name="file" accept="image/*" required onchange="previewImage(event)">
+                        </label>
+                        
+                        <!-- Image preview element -->
+                        <div id="image-preview">
+                            <img id="preview-img" src="" alt="Image Preview" style="display: none; max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px;">
+                        </div>
+                        
+                        <button type="submit">Detect Disease</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Tea Leaf Disease Detection</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Function to preview the image before upload
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('preview-img');
+            
+            // Show the preview image element
+            preview.style.display = 'block';
+
+            // Update the src of the preview image
+            const reader = new FileReader();
+            reader.onload = function() {
+                preview.src = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>

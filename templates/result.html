@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Tea Leaf Disease Detection Result</title>
+</head>
+<body>
+    <header style="width: 100%; background-color: #4CAF50; color: #ffffff; padding: 20px; text-align: center; border-radius: 0; margin-bottom: 20px;">
+        <h1>Tea Leaf Disease Detection</h1>
+        <p>Your solution for healthy tea plants</p>
+    </header>
+
+    <section id="result-section">
+        <div class="container" style="display: flex; justify-content: space-between; gap: 20px;">
+            <!-- Result Container -->
+            <div class="result-container" style="flex: 0.9; background: #f7fdf9; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h2>Result</h2>
+                <p>{{ result }}</p>
+                <img src="{{ image_url }}" alt="Prediction result image showing the detected leaf status" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px;">
+            </div>
+
+            <!-- Information Container -->
+            <div class="info-container" style="flex: 0.9; background: #e8f5e9; border-radius: 12px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h2>About the Disease</h2>
+                <p id="disease-info">
+                    {% if result.lower() == 'the given leaf has: red_spot disease' %}
+                        <strong>Overview:</strong> Red spot disease is a common fungal issue in tea plants that manifests as small, reddish spots on the leaves, which can expand and merge over time. The disease thrives in humid conditions and can significantly impact plant health if not managed properly.<br><br>
+                        <strong>Causes:</strong> Caused by fungal pathogens, particularly in areas with excessive moisture or poor air circulation.<br><br>
+                        <strong>Impact:</strong> Leads to reduced photosynthetic ability, weakens plant vigor, and can result in premature leaf drop, ultimately lowering yields.<br><br>
+                        <strong>Treatment:</strong> Apply appropriate fungicides, ensure proper air circulation by pruning, and avoid excessive watering. Regular monitoring and timely intervention are crucial.
+                    {% elif result.lower() == 'the given leaf has: gray_blight disease' %}
+                        <strong>Overview:</strong> Gray blight, caused by the *Pestalotiopsis* fungus, is characterized by grayish lesions on the leaves. This disease typically occurs in damp, shaded environments and can spread quickly if conditions remain favorable.<br><br>
+                        <strong>Causes:</strong> Proliferates in high humidity and insufficient sunlight, often exacerbated by overcrowded plants.<br><br>
+                        <strong>Impact:</strong> The disease can cause extensive leaf spotting and defoliation, resulting in poor plant growth and reduced tea production.<br><br>
+                        <strong>Treatment:</strong> Use fungicides containing copper, remove affected leaves, and maintain good garden hygiene. Pruning and spacing plants can also improve air flow and reduce moisture buildup.
+                    {% elif result.lower() == 'the given leaf has: helopeltis disease' %}
+                        <strong>Overview:</strong> Helopeltis, or tea mosquito bug, is an insect pest that pierces the leaf surface, leading to dark, necrotic patches. Infestations can severely impact tea plant productivity and quality.<br><br>
+                        <strong>Causes:</strong> The pest *Helopeltis theivora*, commonly found in tea-growing regions, thrives in moist and warm climates.<br><br>
+                        <strong>Impact:</strong> Results in reduced photosynthesis, weakens the plant, and affects the overall yield and quality of tea leaves.<br><br>
+                        <strong>Treatment:</strong> Introduce natural predators like spiders, apply insecticides, and practice crop rotation. Regular inspection and integrated pest management are effective for long-term control.
+                    {% elif result.lower() == 'the given leaf has: algal_spot disease' %}
+                        <strong>Overview:</strong> Algal spot is a condition caused by parasitic algae that create green or rust-colored spots on the leaf surface. This problem usually appears in areas with high humidity and limited air movement.<br><br>
+                        <strong>Causes:</strong> Resulting from algae in conditions with poor air circulation and persistent wetness on leaf surfaces.<br><br>
+                        <strong>Impact:</strong> Though not typically lethal, it can weaken the plant over time, affecting growth and leaf appearance.<br><br>
+                        <strong>Treatment:</strong> Improve air flow through pruning, remove affected leaves, and apply copper-based treatments if necessary. Reduce humidity by spacing plants adequately.
+                    {% elif result.lower() == 'the given leaf has: brown_blight disease' %}
+                        <strong>Overview:</strong> Brown blight presents as large, irregular brown patches on leaves and is commonly associated with stress conditions in the plant. It can escalate quickly, affecting large portions of foliage.<br><br>
+                        <strong>Causes:</strong> Caused by various fungal agents and often triggered by nutrient deficiencies or prolonged exposure to wet conditions.<br><br>
+                        <strong>Impact:</strong> Significantly reduces leaf health, impacting photosynthesis and overall plant vitality, potentially leading to defoliation.<br><br>
+                        <strong>Treatment:</strong> Ensure balanced nutrition, apply broad-spectrum fungicides, and prevent waterlogging. Proper maintenance practices and periodic inspections help control outbreaks.
+                    {% else %}
+                        <strong>Overview:</strong> The detected leaf appears healthy, indicating that the tea plant is in good condition.<br><br>
+                        <strong>Care Tips:</strong> Continue with regular inspections, ensure balanced fertilization, and maintain good watering practices to keep the plant thriving.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="upload-again" style="margin-top: 20px;">
+        <div class="container">
+            <a href="/" class="upload-btn">Check Another Image</a>
+        </div>
+    </section>
+
+    <footer style="margin-top: 10px; text-align: left;">
+        <div class="container">
+            <p>&copy; 2024 Tea Leaf Disease Detection</p>
+        </div>
+    </footer>
+</body>
+</html>
